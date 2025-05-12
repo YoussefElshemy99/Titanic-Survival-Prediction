@@ -1,18 +1,18 @@
 # IDE/Editor files
-.idea/       # PyCharm configs
-.vscode/     # VS Code configs
-*.iml        # IntelliJ module files
+.idea/
+.vscode/
+*.iml
 
 # Virtual environments
-.venv/       # Python virtualenv
+.venv/
 venv/
 env/
 
 # Git/System
-.git/        # Git internals (auto-added, but explicit is safe)
-.DS_Store    # macOS metadata
+.git/
+.DS_Store
 
-# Python 
+# Python
 __pycache__/
 *.py[cod]
 *.egg-info/
