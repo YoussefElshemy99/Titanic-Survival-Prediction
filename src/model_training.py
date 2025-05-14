@@ -17,7 +17,7 @@ def knn_classifier(features_train, features_test, target_train, target_test, n_n
 
     accuracy = accuracy_score(target_test, predictions)
 
-    return accuracy
+    return neigh, accuracy
 
 
 def naive_bayes_classifier(features_train, features_test, target_train, target_test):
@@ -30,7 +30,7 @@ def naive_bayes_classifier(features_train, features_test, target_train, target_t
 
     accuracy = accuracy_score(target_test, predictions)
 
-    return accuracy
+    return gnb, accuracy
 
 def logistic_regression_classifier(features_train, features_test, target_train, target_test):
 
@@ -42,7 +42,7 @@ def logistic_regression_classifier(features_train, features_test, target_train, 
 
     accuracy = accuracy_score(target_test, predictions)
 
-    return accuracy
+    return logreg, accuracy
 
 def decision_tree_classifier(features_train, features_test, target_train, target_test):
 
@@ -54,4 +54,4 @@ def decision_tree_classifier(features_train, features_test, target_train, target
 
     accuracy = accuracy_score(target_test, predictions)
 
-    return accuracy
+    return tree, accuracy
