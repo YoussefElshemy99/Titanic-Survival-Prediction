@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
@@ -15,9 +16,19 @@ def load_and_preprocess_data():
     # Handle Missing Values (Age and Fare)
     train_test_data["Age"].fillna(train_test_data["Age"].median(), inplace=True)
     train_test_data["Embarked"].fillna(train_test_data["Embarked"].mode()[0], inplace=True)
+    train_test_data["Fare"].fillna(train_test_data["Fare"].median(), inplace=True)
 
     pred_data["Age"].fillna(train_test_data["Age"].median(), inplace=True)
     pred_data["Embarked"].fillna(train_test_data["Embarked"].mode()[0], inplace=True)
+    pred_data["Fare"].fillna(train_test_data["Fare"].median(), inplace=True)
+
+    # Replace infinite values with median
+    train_test_data["Fare"].replace([np.inf, -np.inf], train_test_data["Fare"].median(), inplace=True)
+    pred_data["Fare"].replace([np.inf, -np.inf], train_test_data["Fare"].median(), inplace=True)
+
+    # Ensure data is in float64 format before scaling
+    train_test_data["Fare"] = train_test_data["Fare"].astype('float64')
+    pred_data["Fare"] = pred_data["Fare"].astype('float64')
 
     # Encode categorical variables
     le_sex = LabelEncoder()
