@@ -1,19 +1,15 @@
-import numpy as np
-import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
-
 
 def knn_classifier(features_train, features_test, target_train, target_test, n_neighbors=3):
 
     neigh = KNeighborsClassifier(n_neighbors=n_neighbors)
 
-    neigh.fit(features_train, target_train)
-
-    predictions = neigh.predict(features_test)
-
-    #  print(predictions)
+    predictions = neigh.fit(features_train, target_train).predict(features_test)
 
     accuracy = accuracy_score(target_test, predictions)
 
@@ -26,15 +22,11 @@ def naive_bayes_classifier(features_train, features_test, target_train, target_t
 
     predictions = gnb.fit(features_train, target_train).predict(features_test)
 
-    #  print(predictions)
-
     accuracy = accuracy_score(target_test, predictions)
 
     return gnb, accuracy
 
 def logistic_regression_classifier(features_train, features_test, target_train, target_test):
-
-    from sklearn.linear_model import LogisticRegression
 
     logreg = LogisticRegression()
 
@@ -46,8 +38,6 @@ def logistic_regression_classifier(features_train, features_test, target_train, 
 
 def decision_tree_classifier(features_train, features_test, target_train, target_test):
 
-    from sklearn.tree import DecisionTreeClassifier
-
     tree = DecisionTreeClassifier()
 
     predictions = tree.fit(features_train, target_train).predict(features_test)
@@ -55,3 +45,13 @@ def decision_tree_classifier(features_train, features_test, target_train, target
     accuracy = accuracy_score(target_test, predictions)
 
     return tree, accuracy
+
+def random_forest_classifier(features_train, features_test, target_train, target_test):
+
+    rf = RandomForestClassifier(random_state=42)
+
+    predictions = rf.fit(features_train, target_train).predict(features_test)
+
+    accuracy = accuracy_score(target_test, predictions)
+
+    return rf, accuracy

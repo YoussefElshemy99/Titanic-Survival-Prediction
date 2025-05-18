@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-import pickle
-import os
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
 
 def evaluate_model(model, X_test, y_test, model_name="Model"):
     """
@@ -12,52 +10,37 @@ def evaluate_model(model, X_test, y_test, model_name="Model"):
     y_pred = model.predict(X_test)
 
     # Calculate metrics
-    acc = accuracy_score(y_test, y_pred)
+    accuracy = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred)
     cm = confusion_matrix(y_test, y_pred)
-    report = classification_report(y_test, y_pred)
 
     # Print results
     print(f"\n{model_name} Evaluation:")
-    print(f"Accuracy: {acc:.2f}")
-    print("Confusion Matrix:")
-    print(cm)
-    print("\nClassification Report:")
-    print(report)
-    
-    # Return dictionary with metrics (for model comparison)
-    return {
-        'model_name': model_name,
-        'accuracy': acc,
-        'y_pred': y_pred
-    }
+    print(f"Accuracy: {accuracy:.4f}")
+    print(f"Precision: {precision:.4f}")
+    print(f"Recall: {recall:.4f}")
+    print(f"F1 Score: {f1:.4f}")
+    print(f"Confusion Matrix: {cm:.4f}")
 
-def compare_models_metrics(evaluation_results):
-    """
-    Compare multiple models based on their accuracy
-    """
+    # Classification report
+    print("\nClassification Report:")
+    print(classification_report(y_test, y_pred))
+
+def compare_models_metrics(evaluation_results): # The function takes a list of dictionaries, and each dictionary contains: (model_name, accuracy, model)
     # Extract data for comparison
     model_names = [result['model_name'] for result in evaluation_results]
     accuracies = [result['accuracy'] for result in evaluation_results]
-    
+
     # Print comparison
     print("\nModel Comparison:")
     for model, acc in zip(model_names, accuracies):
         print(f"{model}: {acc:.2f}")
-    
+
     # Find best model
     best_idx = np.argmax(accuracies)
+    best_model = evaluation_results[best_idx]['model']
     print(f"\nBest Model: {model_names[best_idx]} with accuracy {accuracies[best_idx]:.2f}")
-    
-    return pd.DataFrame({'Accuracy': accuracies}, index=model_names)
 
-def save_model(model, model_name):
-    """
-    Save trained model to disk
-    """
-    if not os.path.exists('results'):
-        os.makedirs('results')
-    
-    with open(f'results/{model_name.lower().replace(" ", "_")}_model.pkl', 'wb') as f:
-        pickle.dump(model, f)
-    
-    print(f"{model_name} model saved to disk")
+    return best_model
