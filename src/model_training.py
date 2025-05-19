@@ -4,54 +4,54 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+from sklearn.svm import SVC
 
-def knn_classifier(features_train, features_test, target_train, target_test, n_neighbors=3):
+def knn_classifier(features_train, target_train, n_neighbors=3):
 
     neigh = KNeighborsClassifier(n_neighbors=n_neighbors)
 
-    predictions = neigh.fit(features_train, target_train).predict(features_test)
+    neigh.fit(features_train, target_train)
 
-    accuracy = accuracy_score(target_test, predictions)
-
-    return neigh, accuracy
+    return neigh
 
 
-def naive_bayes_classifier(features_train, features_test, target_train, target_test):
+def naive_bayes_classifier(features_train, target_train):
 
     gnb = GaussianNB()
 
-    predictions = gnb.fit(features_train, target_train).predict(features_test)
+    gnb.fit(features_train, target_train)
 
-    accuracy = accuracy_score(target_test, predictions)
+    return gnb
 
-    return gnb, accuracy
-
-def logistic_regression_classifier(features_train, features_test, target_train, target_test):
+def logistic_regression_classifier(features_train, target_train):
 
     logreg = LogisticRegression()
 
-    predictions = logreg.fit(features_train, target_train).predict(features_test)
+    logreg.fit(features_train, target_train)
 
-    accuracy = accuracy_score(target_test, predictions)
+    return logreg
 
-    return logreg, accuracy
-
-def decision_tree_classifier(features_train, features_test, target_train, target_test):
+def decision_tree_classifier(features_train, target_train):
 
     tree = DecisionTreeClassifier()
 
-    predictions = tree.fit(features_train, target_train).predict(features_test)
+    tree.fit(features_train, target_train)
 
-    accuracy = accuracy_score(target_test, predictions)
+    return tree
 
-    return tree, accuracy
-
-def random_forest_classifier(features_train, features_test, target_train, target_test):
+def random_forest_classifier(features_train, target_train):
 
     rf = RandomForestClassifier(random_state=42)
 
-    predictions = rf.fit(features_train, target_train).predict(features_test)
+    rf.fit(features_train, target_train)
 
-    accuracy = accuracy_score(target_test, predictions)
+    return rf
 
-    return rf, accuracy
+
+def svm_classifier(features_train, target_train):
+
+    svm_model = SVC(kernel='rbf', C=1.0, gamma='scale', random_state=42)
+
+    svm_model.fit(features_train, target_train)
+
+    return svm_model

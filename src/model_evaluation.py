@@ -22,13 +22,14 @@ def evaluate_model(model, X_test, y_test, model_name="Model"):
     print(f"Precision: {precision:.4f}")
     print(f"Recall: {recall:.4f}")
     print(f"F1 Score: {f1:.4f}")
-    print(f"Confusion Matrix: {cm:.4f}")
+    print("Confusion Matrix:")
+    print(cm)
 
     # Classification report
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred))
 
-def compare_models_metrics(evaluation_results): # The function takes a list of dictionaries, and each dictionary contains: (model_name, accuracy, model)
+def compare_models_metrics(evaluation_results):
     # Extract data for comparison
     model_names = [result['model_name'] for result in evaluation_results]
     accuracies = [result['accuracy'] for result in evaluation_results]
