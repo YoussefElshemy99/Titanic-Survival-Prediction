@@ -5,8 +5,8 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 def load_and_preprocess_data():
     # Load the Data
-    train_test_data = pd.read_csv("C:\\Users\\Youssef Elshemy\\PycharmProjects\\Titanic Survival Prediction\\data\\Titanic dataset.csv")
-    pred_data = pd.read_csv("C:\\Users\\Youssef Elshemy\\PycharmProjects\\Titanic Survival Prediction\\data\\New passengers.csv")
+    train_test_data = pd.read_csv("data\\Titanic dataset.csv")
+    pred_data = pd.read_csv("data\\New passengers.csv")
 
     # Drop Unnecessary Columns
     cols_to_drop = ["PassengerId", "Name", "Ticket", "Cabin"]

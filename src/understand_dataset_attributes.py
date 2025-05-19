@@ -2,7 +2,7 @@ import pandas as pd
 
 def dataset_info():
    # Load the dataset
-   df = pd.read_csv("C:\\Users\\Youssef Elshemy\\PycharmProjects\\Titanic Survival Prediction\\data\\Titanic dataset.csv")
+   df = pd.read_csv("data\\Titanic dataset.csv")
 
    # Basic info
    print("🔹 Dataset Info:")

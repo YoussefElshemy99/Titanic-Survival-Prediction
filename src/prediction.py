@@ -12,7 +12,7 @@ def predict_new_passengers(model, new_data):
     return result_df
 
 
-def save_predictions(result_df, encoders=None, path="C:\\Users\\Youssef Elshemy\\PycharmProjects\\Titanic Survival Prediction\\results\\predicted_survival.csv"):
+def save_predictions(result_df, encoders=None, path="results\\predicted_survival.csv"):
     # Create a copy to avoid modifying the original DataFrame
     output_df = result_df.copy()
 
